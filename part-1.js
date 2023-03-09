@@ -46,5 +46,4 @@ function battleShipGenerator(numOfShips){
 
 }
 battleShipGenerator(battleShipCount);
-console.log(battleShips);
-
+// console.log(battleShips);
