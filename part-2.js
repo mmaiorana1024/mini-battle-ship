@@ -164,6 +164,10 @@ function guessChecker(guess) {
 
 //runs entire game
 function main() {
+  console.log("\n           Welcome to my Mini-Battleship Game!");
+  console.log("     This is a copy of the classic game Battleship\n");
+
+  const keyStart = rs.keyIn("           Press any key to start the game.\n");
   // clear out all Set()'s
   boardLayout.clear();
   guesses.clear();
@@ -182,10 +186,13 @@ function main() {
 
   console.log("\nThe game board is 10x10\n");
   console.log(
-    "The available spaces to strike are in an X Y coordinate system\n");
-  console.log("   1  2  3  4  5  6  7  8  9  10 ");
-  console.log("   _____________________________ ");
-  console.log("A |\nB |\nC |\nD |\nE |\nF |\nG |\nH |\nI |\nJ |\n");
+    "The available spaces to strike are in an X Y coordinate system\n"
+  );
+  console.log("\t   1  2  3  4  5  6  7  8  9  10 ");
+  console.log("\t   _____________________________");
+  console.log(
+    "\tA |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tB |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tC |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tD |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tE |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tF |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tG |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tH |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tI |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tJ |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n"
+  );
   console.log(battleShips);
 
   // loop that tracks number of battleships still alive and ends when no battleships exist in battleShips Map()
@@ -208,11 +215,4 @@ function main() {
   }
 }
 
-console.log("\n           Welcome to my Mini-Battleship Game!");
-console.log("     This is a copy of the classic game Battleship\n");
-
-const keyStart = rs.keyIn("           Press any key to start the game.\n");
-
 main();
-
-
