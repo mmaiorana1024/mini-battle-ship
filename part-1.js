@@ -34,7 +34,6 @@ const letter = [
 const boardLayout = new Set();
 const battleShips = new Set();
 const guesses = new Set();
-let guess = "";
 
 //generates playing board based on hardcoded quantity
 function boardGenerator(size) {
@@ -66,7 +65,7 @@ function randomXCoord(max) {
 //logs players guess
 function playerGuess() {
   console.log("\nEnter a location to strike ie. 'A2'");
-  guess = rs.prompt().toUpperCase();
+  return rs.prompt().toUpperCase();
 }
 
 //checks if players guess is a space that exists on the board
@@ -93,6 +92,10 @@ function guessChecker(guess) {
 
 //runs entire game
 function main() {
+  console.log("\n           Welcome to my Mini-Battleship Game!");
+  console.log("     This is a copy of the classic game Battleship\n");
+
+  const keyStart = rs.keyIn("           Press any key to start the game.\n");
   // clear out all Set()'s
   boardLayout.clear();
   battleShips.clear();
@@ -100,7 +103,6 @@ function main() {
 
   // create playing board based on board size (hardcoded)
   boardGenerator(boardSize);
-  const spacesArr = Array.from(boardLayout);
 
   // create battleships based on hardcoded quantity
   battleShipGenerator(battleShipCount);
@@ -110,17 +112,18 @@ function main() {
   while (battleShips.size < battleShipCount) {
     battleShips.clear();
     battleShipGenerator(battleShipCount);
-    console.log("it was smaller");
   }
-  
 
   console.log("\nThe game board is 3x3\n");
   console.log("The available spaces to strike are:\n");
-  console.log(spacesArr);
+  console.log("\t    1  2  3\n\t  ----------");
+  console.log(
+    "\tA |  |  |  |\n\t  ----------\n\tB |  |  |  |\n\t  ----------\n\tC |  |  |  |\n\t  ----------"
+  );
 
   // loop that tracks number of battleships still alive and ends when no battleships exist in battleShips Set()
   while (battleShips.size > 0) {
-    playerGuess();
+    let guess = playerGuess();
     boardSpaceExists(guess);
     guessChecker(guess);
   }
@@ -136,10 +139,5 @@ function main() {
     console.log("\nThank you for playing my Mini Battleship Game!\n");
   }
 }
-
-console.log("\n           Welcome to my Mini-Battleship Game!");
-console.log("     This is a copy of the classic game Battleship\n");
-
-const keyStart = rs.keyIn("           Press any key to start the game.\n");
 
 main();
