@@ -34,7 +34,6 @@ const battleShipCount = 5; //hardcoded number of battleships to generate
 const boardLayout = new Set();
 const battleShips = new Map();
 const shipCoordinates = new Set();
-let spaceVacancyCheck;
 
 const guesses = new Set();
 
@@ -124,7 +123,6 @@ function shipBoardPlacement() {
   battleShips.clear();
   shipCoordinates.clear();
   battleShipGenerator(battleShipCount);
-  spaceVacancyCheck = shipLocationCheck();
 }
 
 //checks if players guess is a space that exists on the board
@@ -143,7 +141,6 @@ function playerGuess() {
 function guessChecker(guess) {
   if (!guesses.has(guess)) {
     for (let [name, location] of battleShips) {
-      // console.log(name+":"+location.length);
       if (location.includes(guess)) {
         let spot = location.indexOf(guess);
         location.splice(spot, 1);
@@ -153,10 +150,9 @@ function guessChecker(guess) {
         } else {
           return console.log("\n      Hit!");
         }
-      } else {
-        return console.log("\n      Miss!");
       }
     }
+    return console.log("\n      Miss!");
   } else {
     console.log("\n     You have already picked this location. Miss!");
   }
@@ -180,7 +176,7 @@ function main() {
 
   // loop to make sure that battleships created are not duplicates
   // and there are the proper amount of battleships in play
-  while (shipCoordinates.size != 17 || spaceVacancyCheck) {
+  while (shipCoordinates.size != 17 || shipLocationCheck()) {
     shipBoardPlacement();
   }
 
@@ -193,7 +189,6 @@ function main() {
   console.log(
     "\tA |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tB |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tC |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tD |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tE |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tF |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tG |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tH |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tI |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n\tJ |  |  |  |  |  |  |  |  |  |  |\n\t   -----------------------------\n"
   );
-  console.log(battleShips);
 
   // loop that tracks number of battleships still alive and ends when no battleships exist in battleShips Map()
   while (battleShips.size > 0) {
@@ -201,6 +196,7 @@ function main() {
     boardSpaceExists(guess);
     guessChecker(guess);
     guesses.add(guess);
+    console.log(battleShips);
   }
 
   console.log("\n\n***** CONGRATULATIONS! *****");
